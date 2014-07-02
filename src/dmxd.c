@@ -59,27 +59,9 @@ static void* dmx_writer(void* unused)
 	}
 }
 
-static void signal_handler(int sig) {
-	switch(sig) {
-		case SIGCHLD:
-			{
-				int status;
-				pid_t cpid = wait(&status);
-				printf("child exited with status: %d\n", status);
-			}
-			break;
-		default:
-			break;
-	}
-}
-
 int main(int argc, char* const* argv)
 {
 	struct ftdi_device_list* lst;
-	struct sigaction sa;
-	memset(&sa, 0, sizeof(struct sigaction));
-	sa.sa_handler = signal_handler;
-	sigaction(SIGCHLD, &sa, NULL);
 	ctx = ftdi_new();
 
 	if(argc < 2){
@@ -97,7 +79,7 @@ int main(int argc, char* const* argv)
 				printf("<none>\n");
 			}
 		}
-		die("usage: mqdmx <udp-port> <serialid>");
+		die("usage: dmxd <udp-port> <serialid>");
 	}
 
 	dmx_channels = (char*)mmap(NULL, 513, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, 1, 0);
