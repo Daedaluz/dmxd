@@ -95,7 +95,7 @@ int main(int argc, char* const* argv)
 		ftdi_usb_get_strings(ctx, lst->dev, NULL, 0, NULL, 0, serialid, 100);
 		if(serialid[0] != 0){
 			printf("%s\n", serialid);
-			if(!strcmp(argv[2], serialid)){
+			if(!strcmp(argv[2], serialid) || !strcmp(argv[2], "first_best")){
 				dev = lst->dev;
 				break;
 			}
