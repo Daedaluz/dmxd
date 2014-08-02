@@ -10,7 +10,11 @@
 #include <string.h>
 #include <malloc.h>
 #include <unistd.h>
+#ifdef COMPILED_WITH_FTDI1 
 #include <libftdi1/ftdi.h>
+#else
+#include <ftdi.h>
+#endif
 #include <pthread.h>
 #include <stdint.h>
 #include <sys/mman.h>
