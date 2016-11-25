@@ -46,6 +46,7 @@ void ftdi_break(useconds_t duration)
 	usleep(duration);
 	if(ftdi_set_line_property2(ctx, bits, stop_bits, parity, BREAK_OFF) < 0)
 		errdie("break - lineproperty2 BREAK_OFF");
+        usleep(8);
 }
 
 
