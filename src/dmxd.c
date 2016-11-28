@@ -46,7 +46,7 @@ void ftdi_break(useconds_t duration)
 	usleep(duration);
 	if(ftdi_set_line_property2(ctx, bits, stop_bits, parity, BREAK_OFF) < 0)
 		errdie("break - lineproperty2 BREAK_OFF");
-        usleep(8);
+	usleep(8);
 }
 
 
@@ -54,7 +54,7 @@ static void* dmx_writer(void* unused)
 {
 	while(1) {
 		if (dmx_channels) {
-			ftdi_break(10000);
+			ftdi_break(88);
 			if(ftdi_write_data(ctx, dmx_channels, 513) < 0)
 				errdie("ftdi_write_data");
 		} else {
